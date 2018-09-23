@@ -1,0 +1,2 @@
+# jscap
+Circuit Analysis Package
