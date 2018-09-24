@@ -80,8 +80,8 @@
 
   nv.addGraph(function() {
     var chart = nv.models.lineWithFocusChart()
-    chart.xAxis.tickFormat(d3.format(',0.4f')).axisLabel("time (s)");
-    chart.x2Axis.tickFormat(d3.format(',0.4f'));
+    chart.xAxis.tickFormat(d3.format(',.4f')).axisLabel("time (s)");
+    chart.x2Axis.tickFormat(d3.format(',.4f'));
 
     chart.yTickFormat(d3.format(',.4f'));
 
