@@ -53,21 +53,14 @@
   'v1 vb va 32',
   'r2 vb vc 4',
   'r3 vb 0 8',
-  'c2 vc 0 3e-6'
-  ]
-
-
-  var netlist = [
-  'v1 va 0 10',
-  'r1 vb va 100',
-  'c1 vb 0 1e-3'
+  'c2 vc 0 1e-3'
   ]
 
   var cap = new jscap()
 
   var cir = cap.parse(netlist)
-  var iterations = 10
-  var dt = 1
+  var iterations = 1000
+  var dt = 50e-6
   for (var i = 0; i <= iterations; i++) {
     cap.simulate(cir, dt)
   }
