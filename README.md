@@ -1,2 +1,2 @@
 # jscap
-Circuit Analysis Package
+Circuit Analysis Package (WIP)

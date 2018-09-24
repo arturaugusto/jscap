@@ -1,0 +1,101 @@
+<!DOCTYPE html>
+<html>
+<head>
+  <meta charset="utf-8">
+  <link href="./vendor/nv.d3.min.css" rel="stylesheet" type="text/css">
+  <script src="./vendor/numeric-1.2.6.min.js"></script>
+  <script src="./dist/cap.js"></script>
+  <script src="./vendor/d3.min.js" charset="utf-8"></script>
+  <script src="./vendor/nv.d3.min.js"></script>
+
+  <style>
+    text {
+      font: 12px sans-serif;
+    }
+    svg {
+      display: block;
+    }
+    html, body, #chart, svg {
+      margin: 0px;
+      padding: 0px;
+      height: 100%;
+      width: 100%;
+    }
+  </style>
+</head>
+<body>
+
+<div id="chart" class='with-3d-shadow with-transitions'>
+  <svg></svg>
+</div>
+
+<script>
+  
+  var netlist = [
+  'i1 v1 0 5',
+  'r1 v1 v2 1',
+  'r4 v2 0 5',
+  'r3 v2 v3 4',
+  'r2 v1 v3 2',
+  'i2 v3 0 2'
+  ]
+
+  var netlist = [
+  'v1 va 0 32',
+  'r1 va vb 2',
+  'r2 vb vc 4',
+  'r3 vb 0 8',
+  'v2 vc 0 20'
+  ]
+
+  var netlist = [
+  'r1 va 0 2',
+  'v1 vb va 32',
+  'r2 vb vc 4',
+  'r3 vb 0 8',
+  'c2 vc 0 3e-6'
+  ]
+
+  var cap = new jscap()
+
+  var cir = cap.parse(netlist)
+
+  for (var i = 0; i < 1000; i++) {
+    cap.simulate(cir, 1e-7)
+  }
+
+  var chartRes = cir.currNodes.map((node) => Object({key: node, values: []}))
+
+  for (var i = 0; i < cap.results.length; i++) {
+    let res = cap.results[i]
+    for (var j = 0; j < cir.currNodes.length; j++) {
+      let node = cir.currNodes[j]
+      chartRes[j].values.push({
+        x: res.time,
+        y: res.data[node]
+      })  
+    }
+  }
+  console.log(chartRes)
+
+  nv.addGraph(function() {
+    var chart = nv.models.lineWithFocusChart()
+    chart.xAxis.tickFormat(d3.format(',f')).axisLabel("time (s)");
+    chart.x2Axis.tickFormat(d3.format(',f'));
+
+    chart.yTickFormat(d3.format(',.2f'));
+
+    //chart.useInteractiveGuideline(true);
+
+    d3.select('#chart svg')
+      .datum(chartRes)
+      .call(chart);
+
+    nv.utils.windowResize(chart.update);
+
+    return chart;
+  });
+
+</script>
+</body>
+</html>
