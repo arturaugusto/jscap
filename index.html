@@ -56,12 +56,20 @@
   'c2 vc 0 3e-6'
   ]
 
+
+  var netlist = [
+  'v1 va 0 10',
+  'r1 vb va 100',
+  'c1 vb 0 1e-3'
+  ]
+
   var cap = new jscap()
 
   var cir = cap.parse(netlist)
-
-  for (var i = 0; i < 1000; i++) {
-    cap.simulate(cir, 1e-7)
+  var iterations = 10
+  var dt = 1
+  for (var i = 0; i <= iterations; i++) {
+    cap.simulate(cir, dt)
   }
 
   var chartRes = cir.currNodes.map((node) => Object({key: node, values: []}))
@@ -80,8 +88,8 @@
 
   nv.addGraph(function() {
     var chart = nv.models.lineWithFocusChart()
-    chart.xAxis.tickFormat(d3.format(',f')).axisLabel("time (s)");
-    chart.x2Axis.tickFormat(d3.format(',f'));
+    chart.xAxis.tickFormat(d3.format(',.4f')).axisLabel("time (s)");
+    chart.x2Axis.tickFormat(d3.format(',.4f'));
 
     chart.yTickFormat(d3.format(',.2f'));
 
