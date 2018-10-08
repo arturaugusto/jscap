@@ -1,0 +1,29 @@
+{
+  "name": "jscap",
+  "version": "0.0.1",
+  "description": "Circuit Analysis Package",
+  "main": "index.js",
+  "repository": "https://github.com/arturaugusto/jscap.git",
+  "author": "Artur Augusto Martins <arturaugusto@gmail.com>",
+  "license": "GPL-3.0",
+  "scripts": {
+    "test": "karma start karma.config.js",
+    "dev": "webpack --mode development",
+    "prod": "webpack --mode production"
+  },
+  "dependencies": {
+    "webpack": "^4.20.2"
+  },
+  "devDependencies": {
+    "csv-loader": "^3.0.2",
+    "csv-parse": "^3.1.3",
+    "karma": "^3.0.0",
+    "karma-chrome-launcher": "^2.2.0",
+    "karma-mocha": "^1.3.0",
+    "karma-mocha-reporter": "^2.2.5",
+    "karma-webpack": "^3.0.5",
+    "mocha": "^5.2.0",
+    "papaparse": "^4.6.1",
+    "webpack-cli": "^3.1.2"
+  }
+}

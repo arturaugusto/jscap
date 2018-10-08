@@ -1,0 +1,12 @@
+RC Circuit Transient Response
+r1 va vb 1k
+c1 vb 0 1u
+vin va 0 pwl (0 0 10ms 0 11ms 5v 20ms 5v)
+.tran 0.02ms 20ms
+.control
+run
+hardcopy rc_transient_01.ps v(va) v(vb)
+set height=99999
+print v(va) v(vb) > tmp.txt
+.endc
+.end
