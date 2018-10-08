@@ -1,4 +1,4 @@
-const Cap = require('../src/index.js')
+const cap = require('../src/index.js')
 const csvParse = require('csv-parse')
 var assert = require('assert')
 
@@ -30,19 +30,19 @@ describe('Array', function() {
         'l1 vb 0 1'
       ]
 
-      var cap = new Cap()
+      var jscap = new cap()
 
-      var cir = cap.parse(netlist)
+      var cir = jscap.parse(netlist)
       var dt = 0.02e-3
       var iterations = 20e-3/dt
       for (var i = 0; i <= iterations; i++) {
         if (dt*i > 11e-3) cir.elements.vs.state.v = 5
         if (dt*i < 10e-3) cir.elements.vs.state.v = 0
         if (dt*i >= 10e-3 && dt*i <= 11e-3) cir.elements.vs.state.v += 0.10
-        cap.simulate(cir, dt)
+        jscap.simulate(cir, dt)
       }
       console.log(dataAt(testData, 0.012).data['v(va)'])
-      console.log(dataAt(cap.results, 0.012).data)
+      console.log(dataAt(jscap.results, 0.012).data)
       assert.equal([1,2,3].indexOf(4), -1)
     })
   })

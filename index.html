@@ -38,9 +38,9 @@
   ]
 
 
-  var cap = new Cap()
+  var jscap = new cap()
 
-  var cir = cap.parse(netlist)
+  var cir = jscap.parse(netlist)
   var dt = 0.02e-3
   var iterations = 20e-3/dt
   //console.log(cir)
@@ -54,15 +54,15 @@
     if (dt*i > 11e-3) cir.elements.vs.state.v = 5
     if (dt*i < 10e-3) cir.elements.vs.state.v = 0
     if (dt*i >= 10e-3 && dt*i <= 11e-3) cir.elements.vs.state.v += 0.10
-    cap.simulate(cir, dt)
+    jscap.simulate(cir, dt)
   }
 
   var chartRes = cir.currNodes.map((node) => Object({key: node, values: []}))
 
   /*
   */
-  for (var i = 0; i < cap.results.length; i++) {
-    let res = cap.results[i]
+  for (var i = 0; i < jscap.results.length; i++) {
+    let res = jscap.results[i]
     for (var j = 0; j < cir.currNodes.length; j++) {
       let node = cir.currNodes[j]
       chartRes[j].values.push({
@@ -77,11 +77,11 @@
     key: 'va-vb',
     values: []
   }
-  //console.log(cap.results)
-  for (var i = 0; i < cap.results.length; i++) {
+  //console.log(jscap.results)
+  for (var i = 0; i < jscap.results.length; i++) {
     extra.values.push({
-      x: cap.results[i].time,
-      y: cap.results[i].data.va-cap.results[i].data.vb
+      x: jscap.results[i].time,
+      y: jscap.results[i].data.va-jscap.results[i].data.vb
     })
   }
   chartRes.push(extra)

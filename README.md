@@ -8,10 +8,10 @@ The data input is similar to `spice` family simulators. I'm using ngspice manual
 [Sample RC simulation](https://arturaugusto.github.io/jscap/)
 
 
-# Testing
+## Testing
 
 `yarn test`
 
-# Building
+## Building
 
 `yarn prod`
