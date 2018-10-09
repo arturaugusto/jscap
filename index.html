@@ -51,10 +51,12 @@
     } else {
       cir.elements.is.value = 0
     }*/
-    if (dt*i > 11e-3) cir.elements.vs.state.v = 5
-    if (dt*i < 10e-3) cir.elements.vs.state.v = 0
-    if (dt*i >= 10e-3 && dt*i <= 11e-3) cir.elements.vs.state.v += 0.10
     jscap.simulate(cir, dt)
+    let t = jscap.results[i].time
+    console.log(t)
+    if (t < 10e-3) cir.elements.vs.state.v = 0
+    if (t >= 10e-3 && t <= 11e-3) cir.elements.vs.state.v = (5/(11e-3 - 10e-3))*(t - 10e-3)
+    if (t >= 11e-3) cir.elements.vs.state.v = 5
   }
 
   var chartRes = cir.currNodes.map((node) => Object({key: node, values: []}))

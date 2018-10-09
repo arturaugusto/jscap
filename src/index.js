@@ -1,4 +1,9 @@
-var numeric = require('../vendor/numeric-1.2.6.min');
+var numeric = require('../vendor/numeric-1.2.6.min')
+
+var nameNode = function(node) {
+  return node === '0' ? node : 'v('+node+')'
+}
+
 module.exports = function() {
   var results = []
   var time = 0
@@ -33,9 +38,7 @@ module.exports = function() {
       this.v = 0
       this.i = 0
       this.tick = function (el, res, dt) {
-        var i = res['i('+el.name+')']
         var v = res[el.nodes[0]]
-        var di = i - self.i
         self.v = v
         self.i -= (1/self.L) * self.v * dt
       }
@@ -51,7 +54,7 @@ module.exports = function() {
         var type = line[0][0]
         var obj = {
           line: line,
-          nodes: [line[1], line[2]],
+          nodes: [nameNode(line[1]), nameNode(line[2])],
           name: line[0],
           type: type,
           connections: [],
